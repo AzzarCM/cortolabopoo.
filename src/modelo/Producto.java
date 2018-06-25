@@ -5,30 +5,55 @@
  */
 package modelo;
 
-/**
- *
- * @author LN710Q
- */
+
 public class Producto {
+    private String nombre;
+    private String codigo;
+    private String tipoProducto;
+    private float precio; 
+    private int cantidad;
+    private boolean ExistenciaProduct;
 
-    private int id,stock, cantidad;
-    private String codigo,marca, nombre;
-    private boolean existencia;
-
-    public int getId() {
-        return id;
+    public Producto() {
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Producto(String nombre, String codigo,String tipo,  int cantidad, float precio, boolean disponibilidad) {
+        this.nombre = nombre;
+        this.codigo = codigo;
+        this.tipoProducto = tipo;
+        this.precio = precio;
+        this.cantidad = cantidad;
+        this.ExistenciaProduct = disponibilidad;
+    }
+    
+    public Producto(String codigo, String tipo, int cantidad, float precio, boolean disponibilidad) {
+        this.codigo = codigo;
+        this.precio = precio;
+        this.tipoProducto = tipo;
+        this.cantidad = cantidad;
+        this.ExistenciaProduct = disponibilidad;
+    }
+    
+    
+    public Producto(String tipo, int cantidad, float precio, boolean disponibilidad) {
+        this.precio = precio;
+        this.tipoProducto = tipo;
+        this.cantidad = cantidad;
+        this.ExistenciaProduct = disponibilidad;
+    }
+    
+    public Producto(int cantidad, float precio, boolean disponibilidad) {
+        this.precio = precio;
+        this.cantidad = cantidad;
+        this.ExistenciaProduct = disponibilidad;
     }
 
-    public int getStock() {
-        return stock;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getCodigo() {
@@ -39,20 +64,12 @@ public class Producto {
         this.codigo = codigo;
     }
 
-    public String getMarca() {
-        return marca;
+    public float getPrecio() {
+        return precio;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public boolean getExistencia() {
-        return existencia;
-    }
-
-    public void setExistencia(boolean existencia) {
-        this.existencia = existencia;
+    public void setPrecio(float precio) {
+        this.precio = precio;
     }
 
     public int getCantidad() {
@@ -63,37 +80,20 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
-    public String getNombre() {
-        return nombre;
+    public boolean isDisponibilidad() {
+        return ExistenciaProduct;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setDisponibilidad(boolean disponibilidad) {
+        this.ExistenciaProduct = disponibilidad;
+    }
+
+    public String getTipo() {
+        return tipoProducto;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipoProducto = tipo;
     }
     
-    public Producto(){
-        
-    }
-
-    public Producto(String nombre,int id, String codigo, String marca,int stock, boolean existencia) {
-        this.id = id;
-        this.stock = stock;
-        this.codigo = codigo;
-        this.marca = marca;
-        this.existencia = existencia;
-        this.nombre = nombre;
-    }
-
-    public Producto(String codigo, String marca,int stock, boolean existencia) {
-        this.stock = stock;
-        this.codigo = codigo;
-        this.marca = marca;
-        this.existencia = existencia;
-    }
-
-    public Producto( String marca,int stock, boolean existencia) {
-        this.stock = stock;
-        this.marca = marca;
-        this.existencia = existencia;
-    }
 }

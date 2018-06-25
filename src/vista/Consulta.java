@@ -24,30 +24,27 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelo.Producto;
 
-/**
- *
- * @author LN710Q
- */
 public class Consulta extends JFrame{
     
-    public JLabel lblCodigo,lblTipo,lblStock,lblExistencia, lblNombre, lblprecio, lblcantidad;
-    public JTextField codigo, descripcion, stock, nombre, precio, cantidad;
-    public JComboBox Tipo;
-    
+   public JLabel lblCodigo, lblMarca, lblStock, lblExistencia, lblPrecio, lblNombre;
+
+    public JTextField nombre, codigo, precio, cantidad;
+    public JComboBox tipo;
+
     ButtonGroup existencia = new ButtonGroup();
     public JRadioButton no;
     public JRadioButton si;
     public JTable resultados;
-    
+
     public JPanel table;
-    
-    public JButton buscar,eliminar,insertar,limpiar,actualizar;
-    
-    private static final int ANCHOC = 130, ALTOC = 30;
-    
+
+    public JButton buscar, eliminar, insertar, limpiar, actualizar;
+
+    private static final int ANCHOC = 130, ALTOC = 20;
+
     DefaultTableModel tm;
-    
-    public Consulta(){
+
+    public Consulta() {
         super("Inventario");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
@@ -55,13 +52,17 @@ public class Consulta extends JFrame{
         formulario();
         llenarTabla();
         Container container = getContentPane();
+        container.add(nombre);
+        container.add(precio);
+        container.add(lblNombre);
+        container.add(lblPrecio);
         container.add(lblCodigo);
-        container.add(lblTipo);
+        container.add(lblMarca);
         container.add(lblStock);
         container.add(lblExistencia);
         container.add(codigo);
-        container.add(Tipo);
-        container.add(stock);
+        container.add(tipo);
+        container.add(cantidad);
         container.add(si);
         container.add(no);
         container.add(buscar);
@@ -70,204 +71,201 @@ public class Consulta extends JFrame{
         container.add(eliminar);
         container.add(limpiar);
         container.add(table);
-        container.add(nombre);
-        container.add(lblNombre);
-        container.add(precio);
-        container.add(lblprecio);
-        setSize(600,600);
+        setSize(600, 600);
         eventos();
+
     }
-    
-    public final void agregarLabels(){
-        lblNombre = new JLabel("Nombre");
+
+    private void agregarLabels() {
         lblCodigo = new JLabel("Codigo");
-        lblTipo = new JLabel("Tipo");
-        lblprecio = new JLabel("Precio");
+        lblMarca = new JLabel("Tipo");
         lblStock = new JLabel("Cantidad");
         lblExistencia = new JLabel("Disponibilidad");
-        lblCodigo.setBounds(10,60,ANCHOC,ALTOC);
-        lblTipo.setBounds(300,60,ANCHOC,ALTOC);
-        lblStock.setBounds(10,140,ANCHOC,ALTOC);
-        lblExistencia.setBounds(10,190,ANCHOC,ALTOC);
-        lblNombre.setBounds(10, 10, ANCHOC, ALTOC);
-        lblprecio.setBounds(10,100,ANCHOC, ALTOC);
-        
+        lblNombre = new JLabel("Nombre");
+        lblPrecio = new JLabel("Precio");
+        lblCodigo.setBounds(10, 10, ANCHOC, ALTOC);
+        lblMarca.setBounds(10, 60, ANCHOC, ALTOC);
+        lblStock.setBounds(10, 85, ANCHOC, ALTOC);
+        lblExistencia.setBounds(10, 140, ANCHOC, ALTOC);
+        lblNombre.setBounds(10, 35, ANCHOC, ALTOC);
+        lblPrecio.setBounds(10, 110, ANCHOC, ALTOC);
     }
-    
-    public final void formulario(){
-        nombre = new JTextField();
+
+    private void formulario() {
         codigo = new JTextField();
-        Tipo = new JComboBox();
+        nombre = new JTextField();
+        tipo = new JComboBox();
+        cantidad = new JTextField();
         precio = new JTextField();
-        stock = new JTextField();
         si = new JRadioButton("si", true);
         no = new JRadioButton("no");
         resultados = new JTable();
         buscar = new JButton("Buscar");
         insertar = new JButton("Insertar");
-        eliminar =  new JButton("Eliminar");
+        eliminar = new JButton("Eliminar");
         actualizar = new JButton("Actualizar");
         limpiar = new JButton("Limpiar");
-        
+
         table = new JPanel();
-        Tipo.addItem("FRUTA");
-        Tipo.addItem("BEBIDA");
-        Tipo.addItem("DULCE");
-        Tipo.addItem("VERDURA");
-        
+
+        tipo.addItem("Fruta");
+        tipo.addItem("Verdura");
+        tipo.addItem("Bebida");
+        tipo.addItem("Dulce");
+
         existencia = new ButtonGroup();
         existencia.add(si);
         existencia.add(no);
-        
-        nombre.setBounds(140,10, ANCHOC, ALTOC);
-        codigo.setBounds(140,50,ANCHOC,ALTOC);
-        Tipo.setBounds(350,60,ANCHOC,ALTOC);
-        precio.setBounds(140, 100, ANCHOC, ALTOC);
-        stock.setBounds(140,140,ANCHOC,ALTOC);
-        si.setBounds(100,190,50,ALTOC);
-        no.setBounds(150,190,50,ALTOC);
-        
-        buscar.setBounds(300,10,ANCHOC,ALTOC);
-        insertar.setBounds(10,310,ANCHOC,ALTOC);
-        actualizar.setBounds(150,310,ANCHOC,ALTOC);
-        eliminar.setBounds(300,310,ANCHOC,ALTOC);
-        limpiar.setBounds(450,310,ANCHOC,ALTOC);
+        //-------------------------------------------
+        codigo.setBounds(140, 10, ANCHOC, ALTOC);
+        nombre.setBounds(140, 35, ANCHOC, ALTOC);
+        tipo.setBounds(140, 60, ANCHOC, ALTOC);
+        cantidad.setBounds(140, 85, ANCHOC, ALTOC);
+        si.setBounds(140, 140, 50, ALTOC);
+        no.setBounds(210, 140, 50, ALTOC);
+        precio.setBounds(140, 110, ANCHOC, ALTOC);
+
+        buscar.setBounds(300, 10, ANCHOC, ALTOC);
+        insertar.setBounds(10, 210, ANCHOC, ALTOC);
+        actualizar.setBounds(150, 210, ANCHOC, ALTOC);
+        eliminar.setBounds(300, 210, ANCHOC, ALTOC);
+        limpiar.setBounds(450, 210, ANCHOC, ALTOC);
+
         resultados = new JTable();
-        table.setBounds(10,350,500,200);
+        table.setBounds(10, 250, 500, 200);
         table.add(new JScrollPane(resultados));
+
     }
-    
-    public void llenarTabla(){
-        
-        tm = new DefaultTableModel(){
-            @Override
-            public Class<?> getColumnClass(int column){
-                switch(column){
+
+    private void llenarTabla() {
+        tm = new DefaultTableModel() {
+            public Class<?> getColumnClass(int column) {
+                switch (column) {
                     case 0:
                         return String.class;
                     case 1:
                         return String.class;
                     case 2:
                         return String.class;
+                    case 3:
+                        return String.class;
+                    case 4:
+                        return String.class;
                     default:
                         return Boolean.class;
                 }
             }
         };
-        tm.addColumn("nombre");
+        tm.addColumn("Nombre");
         tm.addColumn("Codigo");
         tm.addColumn("Tipo");
         tm.addColumn("Cantidad");
-        tm.addColumn("Dispoonibilidad");
-        
-        
+        tm.addColumn("Precio");
+        tm.addColumn("Disponible");
+
         ProductoDao fd = new ProductoDao();
-        ArrayList <Producto> productos = fd.readAll();
-        
-        for (Producto fi: productos){
-            tm.addRow(new Object[]{ fi.getCodigo(),fi.getMarca(),fi.getStock(),fi.getExistencia()});
+        ArrayList<Producto> filtros = fd.readAll();
+
+        for (Producto fi : filtros) {
+            tm.addRow(new Object[]{fi.getNombre(), fi.getCodigo(), fi.getTipo(), fi.getCantidad(), (float) fi.getPrecio(), fi.isDisponibilidad()});
         }
-        
         resultados.setModel(tm);
+
     }
-    
-    public void eventos(){
+
+    private void eventos() {
         insertar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ProductoDao fd = new ProductoDao();
-                Producto f = new Producto(codigo.getText(),Tipo.getSelectedItem().toString(), Integer.parseInt(stock.getText()),true);
-                if(no.isSelected()){
-                    f.setExistencia(false);
+                Producto f = new Producto(nombre.getText(), codigo.getText(), tipo.getSelectedItem().toString(), Integer.parseInt(cantidad.getText()), Float.valueOf(precio.getText()), true);
+                if (no.isSelected()) {
+                    f.setDisponibilidad(false);
                 }
-                if(fd.create(f)){
-                    JOptionPane.showMessageDialog(null,"Producto registrado con exito");
+
+                if (fd.create(f)) {
+                    JOptionPane.showMessageDialog(null, "SU PRODUCTO A SIDO REGISTRADO ..");
                     limpiarCampos();
                     llenarTabla();
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR AL MOMENTO DE INSERTAR....");
                 }
-                else{
-                    JOptionPane.showMessageDialog(null,"Ocurrio un problema al momento de insertar el producto");
-                    
-                }
-            }        
+            }
         });
+
         actualizar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ProductoDao fd = new ProductoDao();
-                Producto f = new Producto(codigo.getText(),Tipo.getSelectedItem().toString(),
-                        Integer.parseInt(stock.getText()),true);
-                if(no.isSelected()){
-                    f.setExistencia(false);
+                Producto f = new Producto(codigo.getText(),tipo.getSelectedItem().toString(), Integer.parseInt(cantidad.getText()), Float.valueOf(precio.getText()), true);
+
+                if (no.isSelected()) {
+                    f.setDisponibilidad(false);
                 }
-                if(fd.create(f)){
-                    JOptionPane.showMessageDialog(null,"SE HAN ACTUALIZADO LOS PRODUCTOS!!");
+
+                if (fd.update(f)) {
+                    JOptionPane.showMessageDialog(null, "Producto modificado con éxito");
                     limpiarCampos();
                     llenarTabla();
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR AL MOMENTO DE ACTUALIZAR....");
                 }
-                else{
-                    JOptionPane.showMessageDialog(null,"Ocurrio UN PROBLEMA AL ACTUALIZAR");
-                    
-                }
-            } 
+            }
         });
+
         eliminar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ProductoDao fd = new ProductoDao();
-                if(fd.delete(codigo.getText())){
-                    JOptionPane.showMessageDialog(null,"Producto borrado con exito");
+                Producto f = new Producto(codigo.getText(), tipo.getSelectedItem().toString(), Integer.parseInt(cantidad.getText()), Float.valueOf(precio.getText()), true);
+                if (fd.delete(codigo.getText())) {
+                    JOptionPane.showMessageDialog(null, "Producto eliminado con éxito");
                     limpiarCampos();
                     llenarTabla();
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR AL MOMENTO DE ELIMINAR....");
                 }
-                else{
-                    JOptionPane.showMessageDialog(null,"OCURRIO UN PROBLEMA AL ELIMIAR...");
-                    
-                }
-            } 
+            }
         });
+
         buscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ProductoDao fd = new ProductoDao();
                 Producto f = fd.read(codigo.getText());
-                if(f == null){
-                    JOptionPane.showMessageDialog(null,"ENCONTRADO!! ");
-                }
-                else{
+                if (f == null) {
+                    JOptionPane.showMessageDialog(null, "EL PRODUCTO NO ESTA EN LA BASE DE DATOS");
+                } else {
+
                     codigo.setText(f.getCodigo());
-                    Tipo.setSelectedItem(f.getMarca());
-                    stock.setText(Integer.toString(f.getStock()));
-                    if(f.getExistencia()){
+                    tipo.setSelectedItem(f.getTipo());
+                    cantidad.setText(Integer.toString(f.getCantidad()));
+                    precio.setText(Float.toString(f.getPrecio()));
+
+                    if (f.isDisponibilidad()) {
                         si.setSelected(true);
-                    }
-                    else{
+                    } else {
                         no.setSelected(true);
                     }
                 }
-            } 
+            }
         });
+
         limpiar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 limpiarCampos();
-            } 
-        });
-    }
-    
-    public void limpiarCampos(){
-        codigo.setText("");
-        Tipo.setSelectedItem("FRUTAS");
-        stock.setText("");
-    }
-    
-    public static void main(String[] args){
-        java.awt.EventQueue.invokeLater(new Runnable(){
-            @Override
-            public void run() {
-                new Consulta().setVisible(true);
             }
-            
         });
     }
+
+    public void limpiarCampos() {
+        nombre.setText("");
+        precio.setText("");
+        codigo.setText("");
+        tipo.setSelectedItem("Fruta");
+        cantidad.setText("");
+
+    }
+    
 }
