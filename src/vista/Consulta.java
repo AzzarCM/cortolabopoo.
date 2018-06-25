@@ -34,7 +34,7 @@ public class Consulta extends JFrame{
     ButtonGroup existencia = new ButtonGroup();
     public JRadioButton no;
     public JRadioButton si;
-    public JTable resultados;
+    public JTable RESULTS;
 
     public JPanel table;
 
@@ -99,7 +99,7 @@ public class Consulta extends JFrame{
         precio = new JTextField();
         si = new JRadioButton("si", true);
         no = new JRadioButton("no");
-        resultados = new JTable();
+        RESULTS = new JTable();
         buscar = new JButton("Buscar");
         insertar = new JButton("Insertar");
         eliminar = new JButton("Eliminar");
@@ -131,9 +131,9 @@ public class Consulta extends JFrame{
         eliminar.setBounds(300, 210, ANCHOC, ALTOC);
         limpiar.setBounds(450, 210, ANCHOC, ALTOC);
 
-        resultados = new JTable();
+        RESULTS = new JTable();
         table.setBounds(10, 250, 500, 200);
-        table.add(new JScrollPane(resultados));
+        table.add(new JScrollPane(RESULTS));
 
     }
 
@@ -169,7 +169,7 @@ public class Consulta extends JFrame{
         for (Producto fi : filtros) {
             tm.addRow(new Object[]{fi.getNombre(), fi.getCodigo(), fi.getTipo(), fi.getCantidad(), (float) fi.getPrecio(), fi.isDisponibilidad()});
         }
-        resultados.setModel(tm);
+        RESULTS.setModel(tm);
 
     }
 
