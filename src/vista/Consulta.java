@@ -164,9 +164,9 @@ public class Consulta extends JFrame{
         tm.addColumn("Disponible");
 
         ProductoDao fd = new ProductoDao();
-        ArrayList<Producto> filtros = fd.readAll();
+        ArrayList<Producto> Productos = fd.readAll();
 
-        for (Producto fi : filtros) {
+        for (Producto fi : Productos) {
             tm.addRow(new Object[]{fi.getNombre(), fi.getCodigo(), fi.getTipo(), fi.getCantidad(), (float) fi.getPrecio(), fi.isDisponibilidad()});
         }
         RESULTS.setModel(tm);
